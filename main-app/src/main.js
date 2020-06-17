@@ -3,13 +3,15 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-
 // 导入乾坤函数
 import {
   registerMicroApps,
   setDefaultMountApp,
   start
 } from "qiankun";
+
+import actions from '@/actions'
+Vue.prototype.$actions = actions
 
 Vue.config.productionTip = false
 

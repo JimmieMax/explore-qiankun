@@ -3,6 +3,7 @@ import App from './App.vue'
 import routes from './router'
 import store from './store'
 import VueRouter from 'vue-router';
+import actions from '@/actions'
 Vue.config.productionTip = false
 
 
@@ -15,11 +16,17 @@ let instance = null;
   //下面的 /star  与主应用  registerMicroApps 中的  activeRule 字段对应
 function render(props = {}) {
   const { container } = props;
+  if (props) {
+    // 注入 actions 实例
+    actions.setActions(props);
+  }
   router = new VueRouter({
     base: window.__POWERED_BY_QIANKUN__ ? '/micro-app-vue' : '/',
     mode: 'history',
     routes,
   });
+
+  Vue.prototype.$actions = actions;
 
   instance = new Vue({
     router,
